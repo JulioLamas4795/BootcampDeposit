@@ -6,12 +6,11 @@ import com.bootcamp.bankdeposit.repository.DepositRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
+import org.mockito.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.time.LocalDateTime;
 
 class DepositServiceImplTest {
 
@@ -29,9 +28,11 @@ class DepositServiceImplTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
 
-        //fluxDto = Flux.just(new Deposit("098765432", 13100.00, "USD", "007", "", "876543222", "Pepe", "8765432", ""));
+        fluxDto = Flux.just(new Deposit(432.00, "PEN", "001", "007", "4040710018395424", "4040710018394889", "Pepe Gordon",
+                "8765432", LocalDateTime.now().toString()));
 
-        //depositDtoMono = Mono.just(new DepositDto(13100.00, "USD", "007", "", "876543222", "Pepe", "8765432"));
+        depositDtoMono = Mono.just(new DepositDto(432.00, "PEN", "001", "007", "4040710018395424", "4040710018394889", "Pepe Gordon",
+                "8765432", LocalDateTime.now().toString()));
     }
 
     @Test
@@ -41,11 +42,5 @@ class DepositServiceImplTest {
         Assertions.assertNotNull(service.getDeposit());
     }
 
-    @Test
-    void saveDeposit() {
-//        Mockito.when(depositRepository.save(ArgumentMatchers.any(depositDtoMono.getClass()))).thenReturn();
 
-        //Assertions.assertNotNull(service.saveDeposit(depositDtoMono));
-        //Mockito.verify(depositRepository, Mockito.times(1)).save(ArgumentMatchers.any(depositDtoMono.getClass())));
-    }
 }

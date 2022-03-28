@@ -18,7 +18,7 @@ import reactor.core.publisher.Mono;
 import java.math.BigDecimal;
 
 @Service
-public class DepositServiceImpl implements DepositService {
+public abstract class DepositServiceImpl implements DepositService {
 
     @Value("${microservice-accounts.uri}")
     private String urlAccounts;
@@ -114,7 +114,7 @@ public class DepositServiceImpl implements DepositService {
 
         try {
             AccountDto account = obtainAccountToDeposit(depositDto);
-
+            LOGGER.debug("llegra:" + account.getCurrency());
             if (approveDeposit(account, depositDto)) {
                 LOGGER.debug("calculateBalance:");
                 calculateBalance(account, depositDto);

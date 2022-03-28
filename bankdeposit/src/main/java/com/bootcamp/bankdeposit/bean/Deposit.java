@@ -23,4 +23,15 @@ public class Deposit {
     private String toAccountNumber;
     private String idDepositor;
     private String timestamp;
+
+    public Deposit(Double amount, String currency, String idClient, String fromAccountId, String fromAccountNumber, String toAccountNumber, String toAccountId, String idDepositor, String timestamp) {
+        this.amount = amount;
+        this.currency = currency;
+        this.idClient = idClient;
+        this.fromAccountId=fromAccountId;
+        this.fromAccountNumber = fromAccountNumber;
+        this.toAccountNumber = toAccountNumber;
+        this.idDepositor = idDepositor;
+        this.timestamp = timestamp;
+    }
 }

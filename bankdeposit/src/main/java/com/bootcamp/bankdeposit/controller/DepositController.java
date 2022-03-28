@@ -30,6 +30,7 @@ public class DepositController {
 
     @CircuitBreaker(name = "getDepositCB", fallbackMethod = "fallbackGetDeposit")
     @TimeLimiter(name = "getDepositCB", fallbackMethod = "fallbackGetDeposit")
+
     @GetMapping
     public Flux<DepositDto> getDeposit() {
         LOGGER.debug("Getting Deposit!");
@@ -42,8 +43,8 @@ public class DepositController {
         return depositService.getDepositById(id);
     }
 
-    @PostMapping
-    public Mono<DepositDto> saveDeposit(@RequestBody DepositDto depositDtoMono) {
+    @PostMapping("create")
+    public Mono<DepositDto> saveDeposit(@RequestBody Mono<DepositDto> depositDtoMono) {
         LOGGER.debug("Saving deposit!");
         return depositService.saveDeposit(depositDtoMono);
     }
