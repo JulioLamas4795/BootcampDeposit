@@ -1,5 +1,6 @@
 package com.bootcamp.bankdeposit.controller;
 
+import com.bootcamp.bankdeposit.bean.Deposit;
 import com.bootcamp.bankdeposit.dto.DepositDto;
 import com.bootcamp.bankdeposit.service.DepositService;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
@@ -36,6 +37,12 @@ public class DepositController {
         LOGGER.debug("Getting Deposit!");
         return depositService.getDeposit();
     }
+
+    @GetMapping("/history/{idClient}")
+    public Flux<Deposit> findAllByIdClient(@PathVariable String idClient){
+        return depositService.findAllByIdClient(idClient);
+    }
+
 
     @GetMapping("/{id}")
     public Mono<DepositDto> getDeposit(@PathVariable String id) {

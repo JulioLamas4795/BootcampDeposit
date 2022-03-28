@@ -1,5 +1,6 @@
 package com.bootcamp.bankdeposit.service;
 
+import com.bootcamp.bankdeposit.bean.Deposit;
 import com.bootcamp.bankdeposit.dto.AccountDto;
 import com.bootcamp.bankdeposit.dto.DepositDto;
 import reactor.core.publisher.Flux;
@@ -10,6 +11,8 @@ public interface DepositService {
     Flux<DepositDto> getDeposit();
 
     Mono<DepositDto> getDepositById(String id);
+
+    Flux<Deposit> findAllByIdClient(String idClient);
 
     //Mono<DepositDto> getDepositByName(String name);
 

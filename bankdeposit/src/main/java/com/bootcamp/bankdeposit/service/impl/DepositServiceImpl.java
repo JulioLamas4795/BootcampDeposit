@@ -1,8 +1,10 @@
-package com.bootcamp.bankdeposit.service;
+package com.bootcamp.bankdeposit.service.impl;
 
+import com.bootcamp.bankdeposit.bean.Deposit;
 import com.bootcamp.bankdeposit.dto.AccountDto;
 import com.bootcamp.bankdeposit.dto.DepositDto;
 import com.bootcamp.bankdeposit.repository.DepositRepository;
+import com.bootcamp.bankdeposit.service.DepositService;
 import com.bootcamp.bankdeposit.util.AppUtils;
 import com.bootcamp.bankdeposit.util.Constant;
 import org.slf4j.Logger;
@@ -18,7 +20,7 @@ import reactor.core.publisher.Mono;
 import java.math.BigDecimal;
 
 @Service
-public abstract class DepositServiceImpl implements DepositService {
+public class DepositServiceImpl implements DepositService {
 
     @Value("${microservice-accounts.uri}")
     private String urlAccounts;
@@ -47,6 +49,11 @@ public abstract class DepositServiceImpl implements DepositService {
     }
 
     @Override
+    public Flux<Deposit> findAllByIdClient(String idClient){
+        return depositRepository.findAllByIdClient(idClient);
+    }
+
+    @Override
     public Mono<AccountDto> doTransfer(DepositDto depositDto) {
         AccountDto accountOutgoing = restTemplate.getForObject(urlApigateway + urlAccounts + depositDto.getFromAccountId(), AccountDto.class);
         AccountDto accountDestination = restTemplate.getForObject(urlApigateway + urlAccounts + depositDto.getToAccountId(), AccountDto.class);
@@ -59,6 +66,13 @@ public abstract class DepositServiceImpl implements DepositService {
         }
 
     }
+
+    @Override
+    public Mono<DepositDto> saveDeposit(Mono<DepositDto> depositDtoMono) {
+        return null;
+    }
+
+
 /*
     @Override
     public Mono<DepositDto> getDepositByName(String name) {
@@ -71,6 +85,7 @@ public abstract class DepositServiceImpl implements DepositService {
                 .switchIfEmpty(Mono.just(DepositDto.builder()
                         .depositNumber(null).build()));
     }*/
+
 
     public Mono<DepositDto> saveDeposit(DepositDto depositDto) {
 //    public Mono<DepositDto> saveDeposit(Mono<DepositDto> depositDto) {

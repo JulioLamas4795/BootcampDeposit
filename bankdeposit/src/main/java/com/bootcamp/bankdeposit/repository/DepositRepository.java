@@ -4,6 +4,7 @@ import com.bootcamp.bankdeposit.bean.Deposit;
 import com.bootcamp.bankdeposit.dto.DepositDto;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Configuration
@@ -12,4 +13,6 @@ public interface DepositRepository extends ReactiveMongoRepository<Deposit, Stri
 
     /*Mono<DepositDto> findByName(String name);*/
     //Mono<DepositDto> findByDepositNumber(String depositNumber);
+
+    Flux<Deposit> findAllByIdClient(String idClient);
 }
